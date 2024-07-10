@@ -10,6 +10,22 @@
 			</li>
 		</ul>
 		<ul class="navbar-btn-links">
+			{% if is_granted('ROLE_ADMIN') %}
+				<li class="navbar-btn-link">
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Admin
+						</button>
+						<div class="dropdown-menu" aria-labelledby="triggerId">
+							<a class="dropdown-item" href="{{ path('admin.users.index') }}">Users</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="{{ path('admin.articles.index') }}">Articles</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="{{ path('admin.categories.index') }}">Catégories</a>
+						</div>
+					</div>
+				</li>
+			{% endif %}
 			<li class="navbar-btn-link">
 				{% if app.user %}
 					<a href="/logout" data-turbo="false" class="btn btn-danger">Se deconnecter</a>
