@@ -9,34 +9,9 @@
 	<section class="container mt-2 mb-4">
 		<h1 class="text-center">Administration des articles</h1>
 		<a href="{{ path('admin.articles.create') }}" class="btn btn-primary mt-2">Créer un article</a>
-		<div class="row gy-4">
+		<div class="article-list gy-4">
 			{% for article in articles %}
-				<div class="col-md-4">
-					<div class="card">
-						{% if article.imageName %}
-							<img class="card-img" src="{{ vich_uploader_asset(article) }}" alt="photo {{ article.title }}" loading="lazy">
-						{% endif %}
-						<h4>{{ article.title }}</h4>
-						<em>{{ article.createdAt|format_datetime('full', 'none') }}</em>
-						<p>{{ article.user.fullName }}</p>
-						<p>{{ article.content|length > 150 ? article.content|slice(0, 150) ~  '...' : article.content }}</p>
-						<p>
-							{% for categorie in article.categories %}
-								#{{ categorie.name }}
-							{% endfor %}
-						</p>
-
-						<div class="form-check form-switch" {{ stimulus_controller('switchArticle') }}>
-							<input class="form-check-input" type="checkbox" id="switch-visibility-article-{{ article.id }}" {{ article.enable ? 'checked' }} data-article-id="{{ article.id }}"/>
-							<label class="form-check-label text-{{ article.enable ? 'success' : 'danger' }}" for="switch-visibility-article-{{ article.id }}">{{ article.enable ? 'Actif' : 'Inactif' }}</label>
-						</div>
-
-						<div class="card-btn">
-							<a href="{{ path('admin.articles.update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
-							{% include 'Backend/Article/_deleteForm.html.twig' %}
-						</div>
-					</div>
-				</div>
+				{% include 'Components/_articleCard.html.twig' %}
 			{% endfor %}
 		</div>
 	</section>

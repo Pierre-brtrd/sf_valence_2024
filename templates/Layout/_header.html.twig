@@ -1,9 +1,9 @@
 <header class="navbar">
 	<nav class="container navbar-content">
-		<a href="#" class="navbar-logo">My First Symfo App</a>
+		<a href="{{ path('app.home') }}" class="navbar-logo">My First Symfo App</a>
 		<ul class="navbar-links">
 			<li class="navbar-link">
-				<a href="#">Home</a>
+				<a href="{{ path('app.home') }}" class="{{ app.request.get('_route') == 'app.home' ? 'active' }}">Home</a>
 			</li>
 			<li class="navbar-link">
 				<a href="#">Articles</a>

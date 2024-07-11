@@ -1,0 +1,3 @@
+.article-list {
+    @include grid(repeat(3, 1fr), 1em);
+}
