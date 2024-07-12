@@ -6,7 +6,7 @@
 				<a href="{{ path('app.home') }}" class="{{ app.request.get('_route') == 'app.home' ? 'active' }}">Home</a>
 			</li>
 			<li class="navbar-link">
-				<a href="#">Articles</a>
+				<a href="{{ path('app.articles.index') }}" class="{{ app.request.get('_route') == 'app.articles.index' ? 'active' }}">Articles</a>
 			</li>
 		</ul>
 		<ul class="navbar-btn-links">

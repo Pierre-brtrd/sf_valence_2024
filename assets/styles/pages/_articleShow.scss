@@ -1,0 +1,15 @@
+.article-details {
+    &-wrapper {
+        @include flex(space-between, flex-start, $gap: 1em);
+    }
+
+    &-info {
+        width: 20%;
+        position: sticky;
+        top: 5em;
+    }
+
+    &-content {
+        flex: 1;
+    }
+}
