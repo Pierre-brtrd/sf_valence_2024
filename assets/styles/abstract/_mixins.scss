@@ -6,3 +6,13 @@
     gap: $gap;
     flex-direction: $direction;
 }
+
+@mixin grid($columns: 1fr, $gap: 0, $breakpoint: 767px) {
+    display: grid;
+    grid-template-columns: $columns;
+    gap: $gap;
+
+    @media screen and (max-width: $breakpoint) {
+        grid-template-columns: 1fr;
+    }
+}

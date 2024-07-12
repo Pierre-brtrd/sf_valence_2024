@@ -1,0 +1,18 @@
+<aside class="article-details-info">
+	<h2>Informations:</h2>
+	<p>
+		<i class="bi bi-calendar2-week-fill"></i>
+		{{ article.createdAt|format_datetime('full', 'none') }}
+	</p>
+	<p>
+		<i class="bi bi-person-badge-fill"></i>
+		{{ article.user.fullName }}
+	</p>
+
+	<h2>Catégories:</h2>
+	<div class="badge-list">
+		{% for categorie in article.categories %}
+			<span class="badge bg-primary">{{ categorie.name }}</span>
+		{% endfor %}
+	</div>
+</aside>

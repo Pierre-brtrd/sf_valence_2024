@@ -1,0 +1,13 @@
+<section class="container mt-2 mb-2">
+	<h1 class="text-center">Nos derniers articles</h1>
+
+	{% if app.request.get('_route') == 'app.home' %}
+		<a href="{{ path('app.articles.index') }}" class="btn btn-primary">Voir les articles</a>
+	{% endif %}
+
+	<div class="article-list">
+		{% for article in articles %}
+			{% include 'Components/_articleCard.html.twig' %}
+		{% endfor %}
+	</div>
+</section>
