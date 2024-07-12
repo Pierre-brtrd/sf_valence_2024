@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Filter\ArticleFilter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -27,6 +28,39 @@ class ArticleRepository extends ServiceEntityRepository
         return $query
             ->orderBy('a.createdAt', 'DESC')
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findFilterArticle(ArticleFilter $filter, bool $includeDisable = false): array
+    {
+        $sql = $this->createQueryBuilder('a');
+
+        if (!$includeDisable) {
+            $sql->andWhere('a.enable = true');
+        }
+
+        if ($filter->getQuery()) {
+            $sql->andWhere('a.title LIKE :query')
+                ->setParameter('query', "%{$filter->getQuery()}%");
+        }
+
+        if ($filter->getCategories()) {
+            $sql
+                ->join('a.categories', 'c')
+                ->andWhere('c IN (:categories)')
+                ->setParameter('categories', $filter->getCategories());
+        }
+
+        if ($filter->getAuthors()) {
+            $sql
+                ->join('a.user', 'u')
+                ->andWhere('u IN (:authors)')
+                ->setParameter('authors', $filter->getAuthors());
+        }
+
+        return $sql
+            ->orderBy('a.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
