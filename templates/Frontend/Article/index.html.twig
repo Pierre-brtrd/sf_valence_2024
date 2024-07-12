@@ -6,5 +6,14 @@
 {% endblock %}
 
 {% block body %}
-	{% include 'Components/_articleList.html.twig' %}
+	<section class="container mt-2">
+		<div class="row">
+			<div class="col-md-3">
+				{% include 'Components/_filterArticle.html.twig' %}
+			</div>
+			<div class="col-md-9">
+				{% include 'Components/_articleList.html.twig' %}
+			</div>
+		</div>
+	</section>
 {% endblock %}
